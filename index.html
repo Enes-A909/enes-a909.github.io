@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolyö | Bilgisayar Mühendisliği Öğrencisi</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">Enes Aydın</a>
+            <button class="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#hero">Hakkımda</a></li>
+                <li><a href="#projects">Projelerim</a></li>
+                <li><a href="#skills">Yeteneklerim</a></li>
+                <li><a href="#certifications">Sertifikalarım</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero section-padding">
+            <div class="container hero-container">
+                <div class="hero-text">
+                    <p class="subtitle">Merhaba ben Enes Aydın</p>
+                    <h3 class="title">Bilgisayar Mühendisliği Öğrencisi<br>& Frontend Developer</h3>
+                    <p class="description">
+                        Odak noktam sağlam sistemler kurmak, verimli veritabanları tasarlamak ve ölçeklenebilir çözümler
+                        geliştirmektir.
+                        Sadece kod yazmaktan ziyade stratejik problem çözmeye öncelik veriyorum ve karmaşık
+                        gereksinimleri
+                        güvenilir teknik gerçeklere dönüştürüyorum.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary">Projelerimi Görüntüle</a>
+                        <a href="#contact" class="btn btn-secondary">İletişime Geç</a>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="Profil_1.jpg" alt="Enes Aydın Profile" class="hero-profile-pic">
+                </div>
+            </div>
+        </section>
+
+        <!-- Projeler Bölümü -->
+        <section id="projects" class="projects section-padding bg-alt">
+            <div class="container container-projects relative">
+                <h2 class="section-title">Projelerim</h2>
+                <div class="projects-slider-wrapper">
+                    <button class="slider-arrow prev-arrow" aria-label="Önceki Proje"><i
+                            class="fa-solid fa-chevron-left"></i></button>
+                    <button class="slider-arrow next-arrow" aria-label="Sonraki Proje"><i
+                            class="fa-solid fa-chevron-right"></i></button>
+
+                    <div class="projects-slider">
+                        <article class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">Kuaför Randevu & Yönetim Sistemi</h3>
+                                <p class="project-desc">
+                                    Kuaför işletmeleri için geliştirilmiş, uçtan uca randevu ve personel yönetimini
+                                    sağlayan
+                                    <strong>Full-Stack</strong> web uygulaması. İşletme sahiplerinin operasyonel yükünü
+                                    azaltırken, müşteriler için hatasız bir randevu deneyimi sunar.
+                                </p>
+                                <h4 class="tech-stack-title">Teknik Uygulama & Özellikler:</h4>
+                                <ul class="tech-details-list">
+                                    <li>
+                                        <i class="fa-solid fa-database"></i>
+                                        <span><strong>MySQL Veritabanı Mimarisi:</strong> Hizmet, personel ve müşteri
+                                            verileri arasındaki ilişkileri optimize eden, veri tutarlılığı odaklı
+                                            ilişkisel
+                                            şema tasarımı.</span>
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-server"></i>
+                                        <span><strong>Node.js & Express Backend:</strong> Personel profilleri ve
+                                            kullanıcı
+                                            hesapları için güvenli, performanslı ve ölçeklenebilir RESTful API
+                                            mimarisi.</span>
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-calendar-check"></i>
+                                        <span><strong>Akıllı Randevu Algoritması (JS):</strong> Uygun zaman aralıklarını
+                                            hesaplayan ve eşzamanlılık yönetimiyle randevu çakışmalarını %100 engelleyen
+                                            mantıksal çözüm.</span>
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-code"></i>
+                                        <span><strong>Modern Frontend:</strong> HTML5, CSS3 ve Bootstrap kullanılarak
+                                            geliştirilmiş; mobil uyumlu (responsive) ve dinamik kullanıcı
+                                            arayüzü.</span>
+                                    </li>
+                                </ul>
+                                <div class="project-links">
+                                    <a href="https://github.com/Enes-A909/Kuafor_Randevu_Sitesi" target="_blank"
+                                        class="github-link">
+                                        <i class="fa-brands fa-github"></i> Kaynak koda git ->
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card final-card">
+                            <a href="https://github.com/Enes-A909" target="_blank" class="final-card-link">
+                                <div class="final-card-content">
+                                    <h3>Tümünü Gör</h3>
+                                    <p>GitHub profilimi ziyaret et</p>
+                                    <i class="fa-solid fa-arrow-right-long"></i>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Yetenekler Bölümü -->
+        <section id="skills" class="skills section-padding">
+            <div class="container">
+                <h2 class="section-title">Teknik Bilgilerim</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-header">
+                            <i class="fa-solid fa-code"></i>
+                            <h3>Diller</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li>Java</li>
+                            <li>Python</li>
+                            <li>JavaScript</li>
+                            <li>SQL</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-header">
+                            <i class="fa-solid fa-globe"></i>
+                            <h3>Web Teknolojileri</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li>HTML5 / CSS3</li>
+                            <li>Bootstrap 5</li>
+                            <li>Node.js</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-header">
+                            <i class="fa-solid fa-wrench"></i>
+                            <h3>Araçlar & Altyapı</h3>
+                        </div>
+                        <ul class="skill-list">
+                            <li>GitHub</li>
+                            <li>MySQL</li>
+                            <li>VS Code</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sertifikalar Bölümü -->
+        <section id="certifications" class="certifications section-padding bg-alt">
+            <div class="container">
+                <h2 class="section-title">Sertifikalarım</h2>
+                <div class="cert-grid">
+                    <a href="Sertifikalarım/HTML5_ile_Web_Geliştirme_Sertifika.pdf" target="_blank"
+                        class="cert-card-link">
+                        <div class="cert-card">
+                            <div class="cert-icon">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <div class="cert-info">
+                                <h4>HTML5 ile Web Geliştirme</h4>
+                                <p>BTK Akademi</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="Sertifikalarım/CSS Sertifikam.png" target="_blank" class="cert-card-link">
+                        <div class="cert-card">
+                            <div class="cert-icon">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <div class="cert-info">
+                                <h4>CSS Temelleri</h4>
+                                <p>BTK Akademi</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="Sertifikalarım/JS Sertifikam.png" target="_blank" class="cert-card-link">
+                        <div class="cert-card">
+                            <div class="cert-icon">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <div class="cert-info">
+                                <h4>JavaScript Temelleri</h4>
+                                <p>BTK Akademi</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="Sertifikalarım/Bootstrap_5_Sertifika.pdf" target="_blank" class="cert-card-link">
+                        <div class="cert-card">
+                            <div class="cert-icon">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <div class="cert-info">
+                                <h4>Bootstrap 5 ile Web Geliştirme</h4>
+                                <p>BTK Akademi</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- İletişim Bölümü -->
+        <section id="contact" class="contact section-padding">
+            <div class="container">
+                <div class="contact-card">
+                    <h2 class="section-title">İletişim </h2>
+                    <p class="contact-desc">Teorik bilgisayar mühendisliği bilgilerimi, pratik web projeleriyle
+                        birleştiriyorum. Verimli ve temiz kod yazma vizyonuyla kendimi geliştirmeye devam ediyorum.</p>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=enesaydin79802004@gmail.com"
+                        class="btn btn-primary email-btn">
+                        <i class="fa-solid fa-envelope"></i> İletişime Geçin
+                    </a>
+
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/enes-aydın-374739314" target="_blank" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Enes-A909/Kuafor_Randevu_Sitesi" target="_blank"
+                            aria-label="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Enes Aydın Portföy Sitesi</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
