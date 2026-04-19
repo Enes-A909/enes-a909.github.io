@@ -1,363 +1,363 @@
-const toggleButton = document.querySelector('.mobile-toggle');
-const navLinks = document.querySelector('.nav-links');
-const navItems = document.querySelectorAll('.nav-links a');
+const menuAcmaButonu = document.querySelector('.mobile-toggle');
+const navBaglantilari = document.querySelector('.nav-links');
+const navOgeleri = document.querySelectorAll('.nav-links a');
 
 // Toggle Mobile Menu
-toggleButton.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    const icon = toggleButton.querySelector('i');
+menuAcmaButonu.addEventListener('click', () => {
+    navBaglantilari.classList.toggle('active');
+    const ikon = menuAcmaButonu.querySelector('i');
 
-    if (navLinks.classList.contains('active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-xmark');
+    if (navBaglantilari.classList.contains('active')) {
+        ikon.classList.remove('fa-bars');
+        ikon.classList.add('fa-xmark');
     } else {
-        icon.classList.remove('fa-xmark');
-        icon.classList.add('fa-bars');
+        ikon.classList.remove('fa-xmark');
+        ikon.classList.add('fa-bars');
     }
 });
 
 // Close Mobile Menu on Click
-navItems.forEach(item => {
-    item.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        const icon = toggleButton.querySelector('i');
-        icon.classList.remove('fa-xmark');
-        icon.classList.add('fa-bars');
+navOgeleri.forEach(oge => {
+    oge.addEventListener('click', () => {
+        navBaglantilari.classList.remove('active');
+        const ikon = menuAcmaButonu.querySelector('i');
+        ikon.classList.remove('fa-xmark');
+        ikon.classList.add('fa-bars');
     });
 });
 
-const MOBILE_BREAKPOINT = 768;
-const projectCards = document.querySelectorAll('.project-card:not(.final-card)');
-const projectModalOverlay = document.createElement('div');
-const projectsSlider = document.querySelector('.projects-slider');
-const certificationsSection = document.querySelector('#certifications');
-const certificationsContainer = certificationsSection ? certificationsSection.querySelector('.container') : null;
-const certGrid = certificationsSection ? certificationsSection.querySelector('.cert-grid') : null;
-const certModalOverlay = document.createElement('div');
-let autoSliderIntervalId = null;
-let autoSliderDirection = 1;
-let autoSliderIndex = 0;
-let autoSliderResumeTimeoutId = null;
-let sliderInteractionBound = false;
-let certTopMoreButton = null;
-let certBottomMoreButton = null;
-let certBottomMoreWrap = null;
-let certDesktopExpanded = false;
+const MOBIL_ESIK = 768;
+const projeKartlari = document.querySelectorAll('.project-card:not(.final-card)');
+const projeModalKaplama = document.createElement('div');
+const projelerKaydirici = document.querySelector('.projects-slider');
+const sertifikaBolumu = document.querySelector('#certifications');
+const sertifikaKapsayici = sertifikaBolumu ? sertifikaBolumu.querySelector('.container') : null;
+const sertifikaIzgarasi = sertifikaBolumu ? sertifikaBolumu.querySelector('.cert-grid') : null;
+const sertifikaModalKaplama = document.createElement('div');
+let otomatikKaydiriciAralikId = null;
+let otomatikKaydiriciYon = 1;
+let otomatikKaydiriciIndeks = 0;
+let otomatikKaydiriciDevamZamanlayiciId = null;
+let kaydiriciEtkilesimBaglandi = false;
+let sertifikaUstDahaFazlaButonu = null;
+let sertifikaAltDahaFazlaButonu = null;
+let sertifikaAltDahaFazlaSarmalayi = null;
+let sertifikaMasaustuGenisletildi = false;
 
-projectModalOverlay.className = 'project-modal-overlay';
-projectModalOverlay.innerHTML = '<div class="project-modal" role="dialog" aria-modal="true"></div>';
-document.body.appendChild(projectModalOverlay);
+projeModalKaplama.className = 'project-modal-overlay';
+projeModalKaplama.innerHTML = '<div class="project-modal" role="dialog" aria-modal="true"></div>';
+document.body.appendChild(projeModalKaplama);
 
-const projectModal = projectModalOverlay.querySelector('.project-modal');
+const projeModali = projeModalKaplama.querySelector('.project-modal');
 
-certModalOverlay.className = 'cert-modal-overlay';
-certModalOverlay.innerHTML = '<div class="cert-modal" role="dialog" aria-modal="true"></div>';
-document.body.appendChild(certModalOverlay);
+sertifikaModalKaplama.className = 'cert-modal-overlay';
+sertifikaModalKaplama.innerHTML = '<div class="cert-modal" role="dialog" aria-modal="true"></div>';
+document.body.appendChild(sertifikaModalKaplama);
 
-const certModal = certModalOverlay.querySelector('.cert-modal');
+const sertifikaModali = sertifikaModalKaplama.querySelector('.cert-modal');
 
-function isMobileView() {
-    return window.innerWidth <= MOBILE_BREAKPOINT;
+function mobilGorunumMu() {
+    return window.innerWidth <= MOBIL_ESIK;
 }
 
-function closeProjectModal() {
-    projectModalOverlay.classList.remove('active');
-    projectModal.innerHTML = '';
+function projeModaliniKapat() {
+    projeModalKaplama.classList.remove('active');
+    projeModali.innerHTML = '';
 }
 
-function openProjectModal(card) {
-    projectModal.innerHTML = '';
-    const closeBtn = document.createElement('button');
-    closeBtn.type = 'button';
-    closeBtn.className = 'modal-close-btn';
-    closeBtn.setAttribute('aria-label', 'Pop-up kapat');
-    closeBtn.innerHTML = '&times;';
-    closeBtn.addEventListener('click', closeProjectModal);
+function projeModaliniAc(kart) {
+    projeModali.innerHTML = '';
+    const kapatButonu = document.createElement('button');
+    kapatButonu.type = 'button';
+    kapatButonu.className = 'modal-close-btn';
+    kapatButonu.setAttribute('aria-label', 'Pop-up kapat');
+    kapatButonu.innerHTML = '&times;';
+    kapatButonu.addEventListener('click', projeModaliniKapat);
 
-    const contentClone = card.querySelector('.project-content').cloneNode(true);
-    contentClone.querySelectorAll('.project-toggle-btn').forEach(btn => btn.remove());
-    projectModal.appendChild(closeBtn);
-    projectModal.appendChild(contentClone);
-    projectModalOverlay.classList.add('active');
+    const icerikKopyasi = kart.querySelector('.project-content').cloneNode(true);
+    icerikKopyasi.querySelectorAll('.project-toggle-btn').forEach(buton => buton.remove());
+    projeModali.appendChild(kapatButonu);
+    projeModali.appendChild(icerikKopyasi);
+    projeModalKaplama.classList.add('active');
 }
 
-function closeCertModal() {
-    certModalOverlay.classList.remove('active');
-    certModal.innerHTML = '';
+function sertifikaModaliniKapat() {
+    sertifikaModalKaplama.classList.remove('active');
+    sertifikaModali.innerHTML = '';
 }
 
-function openCertModal() {
-    if (!certGrid) return;
+function sertifikaModaliniAc() {
+    if (!sertifikaIzgarasi) return;
 
-    certModal.innerHTML = '';
-    const closeBtn = document.createElement('button');
-    closeBtn.type = 'button';
-    closeBtn.className = 'modal-close-btn';
-    closeBtn.setAttribute('aria-label', 'Pop-up kapat');
-    closeBtn.innerHTML = '&times;';
-    closeBtn.addEventListener('click', closeCertModal);
+    sertifikaModali.innerHTML = '';
+    const kapatButonu = document.createElement('button');
+    kapatButonu.type = 'button';
+    kapatButonu.className = 'modal-close-btn';
+    kapatButonu.setAttribute('aria-label', 'Pop-up kapat');
+    kapatButonu.innerHTML = '&times;';
+    kapatButonu.addEventListener('click', sertifikaModaliniKapat);
 
-    const certGridClone = certGrid.cloneNode(true);
-    certGridClone.classList.remove('cert-grid-collapsed-mobile');
-    certGridClone.classList.remove('cert-grid-collapsed-desktop');
-    certGridClone.querySelectorAll('.cert-card-link.is-hidden-cert').forEach((item) => {
-        item.classList.remove('is-hidden-cert');
+    const sertifikaIzgaraKopyasi = sertifikaIzgarasi.cloneNode(true);
+    sertifikaIzgaraKopyasi.classList.remove('cert-grid-collapsed-mobile');
+    sertifikaIzgaraKopyasi.classList.remove('cert-grid-collapsed-desktop');
+    sertifikaIzgaraKopyasi.querySelectorAll('.cert-card-link.is-hidden-cert').forEach((oge) => {
+        oge.classList.remove('is-hidden-cert');
     });
-    certModal.appendChild(closeBtn);
-    certModal.appendChild(certGridClone);
-    certModalOverlay.classList.add('active');
+    sertifikaModali.appendChild(kapatButonu);
+    sertifikaModali.appendChild(sertifikaIzgaraKopyasi);
+    sertifikaModalKaplama.classList.add('active');
 }
 
-function setCardCompact(card, compact) {
-    card.classList.toggle('is-compact', compact);
-    const toggleBtn = card.querySelector('.project-toggle-btn');
+function kartKompaktliginiAyarla(kart, kompaktMi) {
+    kart.classList.toggle('is-compact', kompaktMi);
+    const gecisButonu = kart.querySelector('.project-toggle-btn');
 
-    if (!toggleBtn) return;
+    if (!gecisButonu) return;
 
-    if (isMobileView()) {
-        toggleBtn.textContent = 'Daha fazla gör';
+    if (mobilGorunumMu()) {
+        gecisButonu.textContent = 'Daha fazla gör';
         return;
     }
 
-    toggleBtn.textContent = compact ? 'Daha fazla gör' : 'Daha az gör';
+    gecisButonu.textContent = kompaktMi ? 'Daha fazla gör' : 'Daha az gör';
 }
 
-function initProjectCards() {
-    projectCards.forEach(card => {
-        let toggleBtn = card.querySelector('.project-toggle-btn');
+function projeKartlariniBaslat() {
+    projeKartlari.forEach(kart => {
+        let gecisButonu = kart.querySelector('.project-toggle-btn');
 
-        if (!toggleBtn) {
-            toggleBtn = document.createElement('button');
-            toggleBtn.type = 'button';
-            toggleBtn.className = 'project-toggle-btn';
-            toggleBtn.textContent = 'Daha fazla gör';
-            card.appendChild(toggleBtn);
+        if (!gecisButonu) {
+            gecisButonu = document.createElement('button');
+            gecisButonu.type = 'button';
+            gecisButonu.className = 'project-toggle-btn';
+            gecisButonu.textContent = 'Daha fazla gör';
+            kart.appendChild(gecisButonu);
         }
 
-        setCardCompact(card, true);
+        kartKompaktliginiAyarla(kart, true);
 
-        toggleBtn.onclick = () => {
-            if (isMobileView()) {
-                openProjectModal(card);
+        gecisButonu.onclick = () => {
+            if (mobilGorunumMu()) {
+                projeModaliniAc(kart);
                 return;
             }
 
-            const shouldCompact = !card.classList.contains('is-compact');
-            setCardCompact(card, shouldCompact);
+            const kompaktOlmaliMi = !kart.classList.contains('is-compact');
+            kartKompaktliginiAyarla(kart, kompaktOlmaliMi);
         };
     });
 }
 
-function stopAutoSliderMotion() {
-    if (autoSliderIntervalId !== null) {
-        window.clearInterval(autoSliderIntervalId);
-        autoSliderIntervalId = null;
+function otomatikKaydiriciyiDurdur() {
+    if (otomatikKaydiriciAralikId !== null) {
+        window.clearInterval(otomatikKaydiriciAralikId);
+        otomatikKaydiriciAralikId = null;
     }
 
-    if (autoSliderResumeTimeoutId !== null) {
-        window.clearTimeout(autoSliderResumeTimeoutId);
-        autoSliderResumeTimeoutId = null;
+    if (otomatikKaydiriciDevamZamanlayiciId !== null) {
+        window.clearTimeout(otomatikKaydiriciDevamZamanlayiciId);
+        otomatikKaydiriciDevamZamanlayiciId = null;
     }
 }
 
-function syncSliderIndexToNearestCard(sliderItems) {
-    if (!projectsSlider || sliderItems.length === 0) return;
+function kaydiriciIndeksiniEnYakinKartaEsitle(kaydiriciOgeleri) {
+    if (!projelerKaydirici || kaydiriciOgeleri.length === 0) return;
 
-    let nearestIndex = 0;
-    let nearestDistance = Number.POSITIVE_INFINITY;
+    let enYakinIndeks = 0;
+    let enYakinUzaklik = Number.POSITIVE_INFINITY;
 
-    sliderItems.forEach((item, index) => {
-        const distance = Math.abs(projectsSlider.scrollLeft - item.offsetLeft);
-        if (distance < nearestDistance) {
-            nearestDistance = distance;
-            nearestIndex = index;
+    kaydiriciOgeleri.forEach((oge, indeks) => {
+        const uzaklik = Math.abs(projelerKaydirici.scrollLeft - oge.offsetLeft);
+        if (uzaklik < enYakinUzaklik) {
+            enYakinUzaklik = uzaklik;
+            enYakinIndeks = indeks;
         }
     });
 
-    autoSliderIndex = nearestIndex;
+    otomatikKaydiriciIndeks = enYakinIndeks;
 }
 
-function restartAutoSliderAfterDelay(delayMs = 2600) {
-    if (autoSliderResumeTimeoutId !== null) {
-        window.clearTimeout(autoSliderResumeTimeoutId);
+function otomatikKaydiriciyiGecikmeliYenidenBaslat(gecikmeMs = 2600) {
+    if (otomatikKaydiriciDevamZamanlayiciId !== null) {
+        window.clearTimeout(otomatikKaydiriciDevamZamanlayiciId);
     }
 
-    autoSliderResumeTimeoutId = window.setTimeout(() => {
-        initAutoSliderMotion();
-    }, delayMs);
+    otomatikKaydiriciDevamZamanlayiciId = window.setTimeout(() => {
+        otomatikKaydiriciyiBaslat();
+    }, gecikmeMs);
 }
 
-function bindSliderInteractionPause(sliderItems) {
-    if (!projectsSlider || sliderInteractionBound) return;
+function kaydiriciEtkilesimDuraklatmasiniBagla(kaydiriciOgeleri) {
+    if (!projelerKaydirici || kaydiriciEtkilesimBaglandi) return;
 
-    const pauseAndResume = () => {
-        stopAutoSliderMotion();
-        syncSliderIndexToNearestCard(sliderItems);
-        restartAutoSliderAfterDelay();
+    const duraklatVeDevamEt = () => {
+        otomatikKaydiriciyiDurdur();
+        kaydiriciIndeksiniEnYakinKartaEsitle(kaydiriciOgeleri);
+        otomatikKaydiriciyiGecikmeliYenidenBaslat();
     };
 
-    projectsSlider.addEventListener('pointerdown', pauseAndResume, { passive: true });
-    projectsSlider.addEventListener('touchstart', pauseAndResume, { passive: true });
-    projectsSlider.addEventListener('wheel', pauseAndResume, { passive: true });
-    sliderInteractionBound = true;
+    projelerKaydirici.addEventListener('pointerdown', duraklatVeDevamEt, { passive: true });
+    projelerKaydirici.addEventListener('touchstart', duraklatVeDevamEt, { passive: true });
+    projelerKaydirici.addEventListener('wheel', duraklatVeDevamEt, { passive: true });
+    kaydiriciEtkilesimBaglandi = true;
 }
 
-function initAutoSliderMotion() {
-    stopAutoSliderMotion();
+function otomatikKaydiriciyiBaslat() {
+    otomatikKaydiriciyiDurdur();
 
-    if (!projectsSlider) return;
-    if (!isMobileView()) return;
+    if (!projelerKaydirici) return;
+    if (!mobilGorunumMu()) return;
 
-    const sliderItems = Array.from(projectsSlider.querySelectorAll('.project-card'));
-    if (sliderItems.length < 2) return;
+    const kaydiriciOgeleri = Array.from(projelerKaydirici.querySelectorAll('.project-card'));
+    if (kaydiriciOgeleri.length < 2) return;
 
-    bindSliderInteractionPause(sliderItems);
-    syncSliderIndexToNearestCard(sliderItems);
+    kaydiriciEtkilesimDuraklatmasiniBagla(kaydiriciOgeleri);
+    kaydiriciIndeksiniEnYakinKartaEsitle(kaydiriciOgeleri);
 
-    if (autoSliderIndex <= 0) autoSliderDirection = 1;
-    if (autoSliderIndex >= sliderItems.length - 1) autoSliderDirection = -1;
+    if (otomatikKaydiriciIndeks <= 0) otomatikKaydiriciYon = 1;
+    if (otomatikKaydiriciIndeks >= kaydiriciOgeleri.length - 1) otomatikKaydiriciYon = -1;
 
-    const intervalMs = 3200;
+    const aralikMs = 3200;
 
-    autoSliderIntervalId = window.setInterval(() => {
-        if (!isMobileView()) return;
+    otomatikKaydiriciAralikId = window.setInterval(() => {
+        if (!mobilGorunumMu()) return;
 
-        const maxIndex = sliderItems.length - 1;
-        if (autoSliderIndex >= maxIndex) autoSliderDirection = -1;
-        if (autoSliderIndex <= 0) autoSliderDirection = 1;
+        const enBuyukIndeks = kaydiriciOgeleri.length - 1;
+        if (otomatikKaydiriciIndeks >= enBuyukIndeks) otomatikKaydiriciYon = -1;
+        if (otomatikKaydiriciIndeks <= 0) otomatikKaydiriciYon = 1;
 
-        autoSliderIndex += autoSliderDirection;
+        otomatikKaydiriciIndeks += otomatikKaydiriciYon;
 
-        projectsSlider.scrollTo({
-            left: sliderItems[autoSliderIndex].offsetLeft,
+        projelerKaydirici.scrollTo({
+            left: kaydiriciOgeleri[otomatikKaydiriciIndeks].offsetLeft,
             behavior: 'smooth'
         });
-    }, intervalMs);
+    }, aralikMs);
 }
 
-function getCertCardLinks() {
-    if (!certGrid) return [];
-    return Array.from(certGrid.querySelectorAll('.cert-card-link'));
+function sertifikaKartBaglantilariniGetir() {
+    if (!sertifikaIzgarasi) return [];
+    return Array.from(sertifikaIzgarasi.querySelectorAll('.cert-card-link'));
 }
 
-function ensureCertControls() {
-    if (!certificationsContainer || !certGrid) return;
-    const certTitle = certificationsContainer.querySelector('.section-title');
+function sertifikaKontrolleriniHazirla() {
+    if (!sertifikaKapsayici || !sertifikaIzgarasi) return;
+    const sertifikaBasligi = sertifikaKapsayici.querySelector('.section-title');
 
-    if (!certTopMoreButton) {
-        certTopMoreButton = document.createElement('button');
-        certTopMoreButton.type = 'button';
-        certTopMoreButton.className = 'cert-more-btn cert-more-top-btn';
-        certTopMoreButton.textContent = 'Daha fazla gör';
-        certTopMoreButton.addEventListener('click', openCertModal);
+    if (!sertifikaUstDahaFazlaButonu) {
+        sertifikaUstDahaFazlaButonu = document.createElement('button');
+        sertifikaUstDahaFazlaButonu.type = 'button';
+        sertifikaUstDahaFazlaButonu.className = 'cert-more-btn cert-more-top-btn';
+        sertifikaUstDahaFazlaButonu.textContent = 'Daha fazla gör';
+        sertifikaUstDahaFazlaButonu.addEventListener('click', sertifikaModaliniAc);
     }
 
-    if (!certBottomMoreWrap) {
-        certBottomMoreWrap = document.createElement('div');
-        certBottomMoreWrap.className = 'cert-more-bottom-wrap';
+    if (!sertifikaAltDahaFazlaSarmalayi) {
+        sertifikaAltDahaFazlaSarmalayi = document.createElement('div');
+        sertifikaAltDahaFazlaSarmalayi.className = 'cert-more-bottom-wrap';
     }
 
-    if (!certBottomMoreButton) {
-        certBottomMoreButton = document.createElement('button');
-        certBottomMoreButton.type = 'button';
-        certBottomMoreButton.className = 'cert-more-btn cert-more-bottom-btn';
-        certBottomMoreButton.textContent = 'Daha fazla gör';
-        certBottomMoreButton.addEventListener('click', () => {
-            const certCards = getCertCardLinks();
-            if (!certCards.length) return;
+    if (!sertifikaAltDahaFazlaButonu) {
+        sertifikaAltDahaFazlaButonu = document.createElement('button');
+        sertifikaAltDahaFazlaButonu.type = 'button';
+        sertifikaAltDahaFazlaButonu.className = 'cert-more-btn cert-more-bottom-btn';
+        sertifikaAltDahaFazlaButonu.textContent = 'Daha fazla gör';
+        sertifikaAltDahaFazlaButonu.addEventListener('click', () => {
+            const sertifikaKartlari = sertifikaKartBaglantilariniGetir();
+            if (!sertifikaKartlari.length) return;
 
-            certDesktopExpanded = !certDesktopExpanded;
+            sertifikaMasaustuGenisletildi = !sertifikaMasaustuGenisletildi;
 
-            if (certDesktopExpanded) {
-                certGrid.classList.remove('cert-grid-collapsed-desktop');
-                certCards.forEach((item) => item.classList.remove('is-hidden-cert'));
-                certBottomMoreWrap.classList.add('expanded');
-                certBottomMoreButton.textContent = 'Daha az gör';
+            if (sertifikaMasaustuGenisletildi) {
+                sertifikaIzgarasi.classList.remove('cert-grid-collapsed-desktop');
+                sertifikaKartlari.forEach((oge) => oge.classList.remove('is-hidden-cert'));
+                sertifikaAltDahaFazlaSarmalayi.classList.add('expanded');
+                sertifikaAltDahaFazlaButonu.textContent = 'Daha az gör';
                 return;
             }
 
-            certCards.forEach((item) => item.classList.remove('is-hidden-cert'));
-            certCards.slice(8).forEach((item) => item.classList.add('is-hidden-cert'));
-            certGrid.classList.add('cert-grid-collapsed-desktop');
-            certBottomMoreWrap.classList.remove('expanded');
-            certBottomMoreButton.textContent = 'Daha fazla gör';
+            sertifikaKartlari.forEach((oge) => oge.classList.remove('is-hidden-cert'));
+            sertifikaKartlari.slice(8).forEach((oge) => oge.classList.add('is-hidden-cert'));
+            sertifikaIzgarasi.classList.add('cert-grid-collapsed-desktop');
+            sertifikaAltDahaFazlaSarmalayi.classList.remove('expanded');
+            sertifikaAltDahaFazlaButonu.textContent = 'Daha fazla gör';
         });
     }
 
-    if (!certTopMoreButton.parentElement && certTitle) {
-        certTitle.insertAdjacentElement('afterend', certTopMoreButton);
+    if (!sertifikaUstDahaFazlaButonu.parentElement && sertifikaBasligi) {
+        sertifikaBasligi.insertAdjacentElement('afterend', sertifikaUstDahaFazlaButonu);
     }
 
-    if (!certBottomMoreWrap.parentElement) {
-        certGrid.insertAdjacentElement('afterend', certBottomMoreWrap);
+    if (!sertifikaAltDahaFazlaSarmalayi.parentElement) {
+        sertifikaIzgarasi.insertAdjacentElement('afterend', sertifikaAltDahaFazlaSarmalayi);
     }
 
-    if (!certBottomMoreButton.parentElement) {
-        certBottomMoreWrap.appendChild(certBottomMoreButton);
+    if (!sertifikaAltDahaFazlaButonu.parentElement) {
+        sertifikaAltDahaFazlaSarmalayi.appendChild(sertifikaAltDahaFazlaButonu);
     }
 }
 
-function initCertificationsDisplay() {
-    if (!certGrid || !certificationsContainer) return;
+function sertifikaGorunumunuBaslat() {
+    if (!sertifikaIzgarasi || !sertifikaKapsayici) return;
 
-    ensureCertControls();
-    const certCards = getCertCardLinks();
+    sertifikaKontrolleriniHazirla();
+    const sertifikaKartlari = sertifikaKartBaglantilariniGetir();
 
-    certCards.forEach((item) => item.classList.remove('is-hidden-cert'));
-    certGrid.classList.remove('cert-grid-collapsed-mobile', 'cert-grid-collapsed-desktop');
-    certTopMoreButton.classList.remove('active');
-    certBottomMoreWrap.classList.remove('active');
-    certBottomMoreWrap.classList.remove('expanded');
-    certDesktopExpanded = false;
+    sertifikaKartlari.forEach((oge) => oge.classList.remove('is-hidden-cert'));
+    sertifikaIzgarasi.classList.remove('cert-grid-collapsed-mobile', 'cert-grid-collapsed-desktop');
+    sertifikaUstDahaFazlaButonu.classList.remove('active');
+    sertifikaAltDahaFazlaSarmalayi.classList.remove('active');
+    sertifikaAltDahaFazlaSarmalayi.classList.remove('expanded');
+    sertifikaMasaustuGenisletildi = false;
 
-    if (isMobileView()) {
-        if (certCards.length > 4) {
-            certCards.slice(4).forEach((item) => item.classList.add('is-hidden-cert'));
-            certGrid.classList.add('cert-grid-collapsed-mobile');
-            certTopMoreButton.classList.add('active');
+    if (mobilGorunumMu()) {
+        if (sertifikaKartlari.length > 4) {
+            sertifikaKartlari.slice(4).forEach((oge) => oge.classList.add('is-hidden-cert'));
+            sertifikaIzgarasi.classList.add('cert-grid-collapsed-mobile');
+            sertifikaUstDahaFazlaButonu.classList.add('active');
         }
         return;
     }
 
-    if (certCards.length > 8) {
-        certCards.slice(8).forEach((item) => item.classList.add('is-hidden-cert'));
-        certGrid.classList.add('cert-grid-collapsed-desktop');
-        certBottomMoreWrap.classList.add('active');
-        certBottomMoreButton.textContent = 'Daha fazla gör';
+    if (sertifikaKartlari.length > 8) {
+        sertifikaKartlari.slice(8).forEach((oge) => oge.classList.add('is-hidden-cert'));
+        sertifikaIzgarasi.classList.add('cert-grid-collapsed-desktop');
+        sertifikaAltDahaFazlaSarmalayi.classList.add('active');
+        sertifikaAltDahaFazlaButonu.textContent = 'Daha fazla gör';
     }
 }
 
-projectModalOverlay.addEventListener('click', (event) => {
-    if (event.target === projectModalOverlay) {
-        closeProjectModal();
+projeModalKaplama.addEventListener('click', (olay) => {
+    if (olay.target === projeModalKaplama) {
+        projeModaliniKapat();
     }
 });
 
-certModalOverlay.addEventListener('click', (event) => {
-    if (event.target === certModalOverlay) {
-        closeCertModal();
+sertifikaModalKaplama.addEventListener('click', (olay) => {
+    if (olay.target === sertifikaModalKaplama) {
+        sertifikaModaliniKapat();
     }
 });
 
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-        closeProjectModal();
-        closeCertModal();
+document.addEventListener('keydown', (olay) => {
+    if (olay.key === 'Escape') {
+        projeModaliniKapat();
+        sertifikaModaliniKapat();
     }
 });
 
 window.addEventListener('resize', () => {
-    projectCards.forEach(card => setCardCompact(card, true));
-    if (!isMobileView()) {
-        closeProjectModal();
-        closeCertModal();
-        stopAutoSliderMotion();
+    projeKartlari.forEach(kart => kartKompaktliginiAyarla(kart, true));
+    if (!mobilGorunumMu()) {
+        projeModaliniKapat();
+        sertifikaModaliniKapat();
+        otomatikKaydiriciyiDurdur();
     } else {
-        initAutoSliderMotion();
+        otomatikKaydiriciyiBaslat();
     }
-    initCertificationsDisplay();
+    sertifikaGorunumunuBaslat();
 });
 
-initProjectCards();
-initAutoSliderMotion();
-initCertificationsDisplay();
+projeKartlariniBaslat();
+otomatikKaydiriciyiBaslat();
+sertifikaGorunumunuBaslat();
