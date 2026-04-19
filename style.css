@@ -299,6 +299,13 @@ ul {
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.project-card:not(.final-card) {
+    display: grid;
+    grid-template-rows: 1fr auto;
 }
 
 .project-card:hover {
@@ -312,6 +319,76 @@ ul {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+}
+
+.project-card:not(.final-card).is-compact {
+    height: 360px;
+}
+
+.project-card:not(.final-card).is-compact .project-content {
+    overflow: hidden;
+}
+
+.project-card:not(.final-card).is-compact .project-content::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 110px;
+    background: linear-gradient(to bottom, rgba(30, 41, 59, 0), rgba(30, 41, 59, 1));
+    pointer-events: none;
+}
+
+.project-card:not(.final-card) .project-content {
+    position: relative;
+}
+
+.project-toggle-btn {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: rgba(15, 23, 42, 0.9);
+    color: var(--clr-accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.project-toggle-btn:hover {
+    background-color: rgba(30, 41, 59, 1);
+    color: #93c5fd;
+}
+
+.project-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.78);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 2000;
+}
+
+.project-modal-overlay.active {
+    display: flex;
+}
+
+.project-modal {
+    width: min(100%, 620px);
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--clr-surface);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+}
+
+.project-modal .project-content {
+    padding: 1.5rem;
 }
 
 .final-card {
@@ -521,6 +598,97 @@ ul {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
+    position: relative;
+}
+
+.cert-card-link.is-hidden-cert {
+    display: none;
+}
+
+.cert-more-btn {
+    border: 1px solid rgba(147, 197, 253, 0.45);
+    background-color: rgba(15, 23, 42, 0.9);
+    color: #bfdbfe;
+    padding: 0.65rem 1.2rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cert-more-btn:hover {
+    background-color: rgba(30, 41, 59, 1);
+    border-color: rgba(147, 197, 253, 0.7);
+    color: #dbeafe;
+}
+
+.cert-more-top-btn {
+    display: none;
+    margin: -1rem 0 1.4rem;
+}
+
+.cert-more-top-btn.active {
+    display: inline-flex;
+    align-items: center;
+}
+
+.cert-more-bottom-wrap {
+    display: none;
+    position: relative;
+    justify-content: center;
+    margin-top: -2.2rem;
+    padding-top: 3.1rem;
+}
+
+.cert-more-bottom-wrap::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 3.2rem;
+    background: linear-gradient(to bottom, rgba(17, 24, 39, 0), rgba(17, 24, 39, 0.98));
+    pointer-events: none;
+}
+
+.cert-more-bottom-wrap.active {
+    display: flex;
+}
+
+.cert-more-bottom-wrap.expanded {
+    margin-top: 1.2rem;
+    padding-top: 0;
+}
+
+.cert-more-bottom-wrap.expanded::before {
+    display: none;
+}
+
+.cert-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(2, 6, 23, 0.78);
+    z-index: 2000;
+}
+
+.cert-modal-overlay.active {
+    display: flex;
+}
+
+.cert-modal {
+    width: min(100%, 760px);
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--clr-bg-alt);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+    padding: 1.2rem;
 }
 
 .cert-card {
@@ -704,6 +872,10 @@ footer {
         /* Almost full width horizontally on mobile */
     }
 
+    .project-card:not(.final-card).is-compact {
+        height: 300px;
+    }
+
     .slider-arrow {
         display: none;
         /* Rely on native swipe interaction on mobile */
@@ -713,7 +885,25 @@ footer {
         padding: 1.5rem;
     }
 
+    .project-toggle-btn {
+        font-size: 0.9rem;
+        padding: 0.8rem 0.9rem;
+    }
+
     .btn {
         width: 100%;
+    }
+
+    .cert-more-top-btn {
+        margin: -0.5rem 0 1.2rem;
+    }
+
+    .cert-more-bottom-wrap {
+        display: none !important;
+    }
+
+    .cert-modal {
+        width: min(100%, 560px);
+        padding: 1rem;
     }
 }
