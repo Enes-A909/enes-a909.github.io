@@ -381,6 +381,7 @@ ul {
     width: min(100%, 620px);
     max-height: 90vh;
     overflow-y: auto;
+    position: relative;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background-color: var(--clr-surface);
@@ -684,11 +685,29 @@ ul {
     width: min(100%, 760px);
     max-height: 90vh;
     overflow-y: auto;
+    position: relative;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background-color: var(--clr-bg-alt);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
     padding: 1.2rem;
+}
+
+.modal-close-btn {
+    display: none;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.95);
+    color: #e2e8f0;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
 }
 
 .cert-card {
@@ -904,6 +923,16 @@ footer {
 
     .cert-modal {
         width: min(100%, 560px);
-        padding: 1rem;
+        padding: 2.9rem 1rem 1rem;
+    }
+
+    .project-modal {
+        padding-top: 2.4rem;
+    }
+
+    .modal-close-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
 }

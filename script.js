@@ -67,8 +67,16 @@ function closeProjectModal() {
 
 function openProjectModal(card) {
     projectModal.innerHTML = '';
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'modal-close-btn';
+    closeBtn.setAttribute('aria-label', 'Pop-up kapat');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.addEventListener('click', closeProjectModal);
+
     const contentClone = card.querySelector('.project-content').cloneNode(true);
     contentClone.querySelectorAll('.project-toggle-btn').forEach(btn => btn.remove());
+    projectModal.appendChild(closeBtn);
     projectModal.appendChild(contentClone);
     projectModalOverlay.classList.add('active');
 }
@@ -82,12 +90,20 @@ function openCertModal() {
     if (!certGrid) return;
 
     certModal.innerHTML = '';
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'modal-close-btn';
+    closeBtn.setAttribute('aria-label', 'Pop-up kapat');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.addEventListener('click', closeCertModal);
+
     const certGridClone = certGrid.cloneNode(true);
     certGridClone.classList.remove('cert-grid-collapsed-mobile');
     certGridClone.classList.remove('cert-grid-collapsed-desktop');
     certGridClone.querySelectorAll('.cert-card-link.is-hidden-cert').forEach((item) => {
         item.classList.remove('is-hidden-cert');
     });
+    certModal.appendChild(closeBtn);
     certModal.appendChild(certGridClone);
     certModalOverlay.classList.add('active');
 }
